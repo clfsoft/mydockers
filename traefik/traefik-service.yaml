@@ -1,7 +1,7 @@
 tls:
   certificates:
-    - keyFile: ./certs/_wildcard.mysite.com-key.pem
-      certFile: ./certs/_wildcard.mysite.com.pem  
+    - keyFile: ./certs/_wildcard.local.dev-key.pem
+      certFile: ./certs/_wildcard.local.dev.pem  
 http:
   #middlewares:
     #rewriteHeaders:
@@ -15,25 +15,25 @@ http:
     dashboard:
       entryPoints: 
         - "web"
-      rule: "Host(`api.mysite.com`)"
+      rule: "Host(`api.local.dev`)"
       service: "api@internal"
 
     api:
       entryPoints:
         - "websecure"
-      rule: "Host(`api.mysite.com`)"
+      rule: "Host(`api.local.dev`)"
       service: api
       tls: {}
     app:
       entryPoints:
         - "websecure"
-      rule: "Host(`app.mysite.com`)"
+      rule: "Host(`app.local.dev`)"
       service: app
       tls: {}
     keycloak:
       entryPoints:
         - "websecure"
-      rule: "Host(`kc.mysite.com`)"
+      rule: "Host(`kc.local.dev`)"
       service: keycloak
       tls: {}
   services:
@@ -46,9 +46,9 @@ http:
       loadBalancer:
         passHostHeader: true
         servers:
-          - url: "http://localhost:5173"
+          - url: "http://nginx"
     keycloak:
       loadBalancer:
         passHostHeader: true
         servers:
-          - url: "http://localhost:8080"
+          - url: "http://keycloak:8080"

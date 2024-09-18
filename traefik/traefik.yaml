@@ -29,9 +29,9 @@ entryPoints:
     http:
       tls: 
         domains:
-        - main: kc.mysite.com
-        - main: app.mysite.com
-        - main: api.mysite.com
+        - main: kc.local.dev
+        - main: app.local.dev
+        - main: api.local.dev
 ################################################################
 # Traefik logs configuration
 ################################################################
