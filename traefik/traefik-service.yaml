@@ -1,0 +1,54 @@
+tls:
+  certificates:
+    - keyFile: ./certs/_wildcard.mysite.com-key.pem
+      certFile: ./certs/_wildcard.mysite.com.pem  
+http:
+  #middlewares:
+    #rewriteHeaders:
+      #plugin:
+        #rewriteHeaders:
+          #rewrites:
+            #- header: "location"
+              #regex: "^http://(.+)$"
+              #replacement: "https://$1"
+  routers:
+    dashboard:
+      entryPoints: 
+        - "web"
+      rule: "Host(`api.mysite.com`)"
+      service: "api@internal"
+
+    api:
+      entryPoints:
+        - "websecure"
+      rule: "Host(`api.mysite.com`)"
+      service: api
+      tls: {}
+    app:
+      entryPoints:
+        - "websecure"
+      rule: "Host(`app.mysite.com`)"
+      service: app
+      tls: {}
+    keycloak:
+      entryPoints:
+        - "websecure"
+      rule: "Host(`kc.mysite.com`)"
+      service: keycloak
+      tls: {}
+  services:
+    api:
+      loadBalancer:
+        passHostHeader: true
+        servers:
+          - url: "http://localhost:9080"
+    app:
+      loadBalancer:
+        passHostHeader: true
+        servers:
+          - url: "http://localhost:5173"
+    keycloak:
+      loadBalancer:
+        passHostHeader: true
+        servers:
+          - url: "http://localhost:8080"
