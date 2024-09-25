@@ -12,4 +12,4 @@ RUN apk add --no-cache bind-tools
 
 ENV TZ=Asia/Tokyo
 
-ENTRYPOINT ["/bin/bash"]
+CMD ["/bin/bash"]
