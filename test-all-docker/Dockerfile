@@ -5,8 +5,9 @@ RUN apk update  && apk upgrade && apk add --no-cache tzdata   \
     net-tools bash \
     vim git build-base ca-certificates libc6-compat \
     wget curl jq nushell bind-tools \
-    go ruby openjdk21 python3 nodejs 
 
+    go ruby openjdk21 python3 nodejs \
+	 && echo "apk end"
 
 # libc6-compat 解决nodejs执行  required file not found
 # TODO multiple version
