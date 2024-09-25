@@ -3,13 +3,12 @@ RUN apt update -y && apt -y install \
     build-essential vim git bash ca-certificates \
     iputils-ping net-tools wget curl jq \
     mariadb-client postgresql-client \
-    
-	 && echo "--install end--"
+    && echo "--install end--"
 
 ENV TZ=Asia/Tokyo
 
 # multiple version
-#ENV VER_JAVA=21.0.2+13
+ENV VER_JAVA=21.0.2+13
 COPY ./init /opt/init
 RUN cat /opt/init/vfox-install.sh | bash
 RUN echo 'eval "$(vfox activate bash)"' >> ~/.bashrc
