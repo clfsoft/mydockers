@@ -9,12 +9,15 @@ ENV TZ=Asia/Tokyo
 
 # multiple version
 ENV VER_JAVA=21.0.2+13
+ENV VER_NODE=21.7.3
 COPY ./init /opt/init
 RUN cat /opt/init/vfox-install.sh | bash
 RUN echo 'eval "$(vfox activate bash)"' >> ~/.bashrc
-RUN vfox add nodejs golang java php ruby python maven gradle terraform
-RUN vfox install nodejs@21.7.3 java@23.0-graal java@${VER_JAVA} maven@3.9.9 gradle@8.10.2 ruby@v3.3.4 golang@1.23.1 php@8.3.10 python@3.14.0 terraform@1.9.6
-#ENV JAVA_HOME=~/.version-fox/cache/java/current
+RUN vfox add nodejs golang java ruby maven gradle terraform
+RUN vfox install ruby@3.3.4 golang@1.23.1 php@8.3.10 python@3.12.6 terraform@1.9.6
+RUN vfox install nodejs@${VER_NODE} java@${VER_JAVA} maven@3.9.9 gradle@8.10.2
+RUN vfox use -g java@${VER_JAVA} nodejs@${VER_NODE}
+ENV JAVA_HOME=~/.version-fox/cache/java/current
 #20240925
 
 
