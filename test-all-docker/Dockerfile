@@ -16,7 +16,7 @@ RUN echo 'eval "$(vfox activate bash)"' >> ~/.bashrc
 RUN vfox add nodejs golang java ruby maven gradle terraform
 RUN vfox install ruby@3.3.4 golang@1.23.1 terraform@1.9.6
 RUN vfox install nodejs@${VER_NODE} java@${VER_JAVA} maven@3.9.9 gradle@8.10.2
-RUN vfox use -g java@${VER_JAVA} nodejs@${VER_NODE}
+RUN vfox use -g java@${VER_JAVA} && vfox use -g nodejs@${VER_NODE}
 ENV JAVA_HOME=~/.version-fox/cache/java/current
 #20240925
 
